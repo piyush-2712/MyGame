@@ -2,6 +2,9 @@ package game.sts.mygame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+
+import game.sts.gfx.ImageLoader;
 
 public class Game implements Runnable {
 	private Display display;
@@ -18,6 +21,7 @@ public class Game implements Runnable {
 
 	private BufferStrategy bs;
 	private Graphics g;
+	private BufferedImage testImage;
 
 
 	public boolean running=false;
@@ -26,6 +30,7 @@ public class Game implements Runnable {
 	private void init(){
 		System.out.println("2");
 		display= new Display(title,width,height);
+		testImage=ImageLoader.loadImage("/textures/purple.png");
 	}
 
 	public synchronized void start(){
@@ -75,16 +80,19 @@ public class Game implements Runnable {
 		g=bs.getDrawGraphics();
 		g.fillRect(0, 0, width, height);
 
-g.clearRect(0, 0, width, height);
+		g.clearRect(0, 0, width, height);
 
-g.setColor(Color.blue);
+		g.setColor(Color.blue);
 
-g.fillRect(40, 40, 30, 20);
+		g.fillRect(40, 40, 30, 20);
 
 
-g.setColor(Color.green);
+		g.setColor(Color.green);
 
-g.fillRect(80, 80, 10, 10);
+		g.fillRect(80, 80, 10, 10);
+		
+		g.drawImage(testImage, 20, 20, null);
+		
 		bs.show();
 		g.dispose();
 	}
